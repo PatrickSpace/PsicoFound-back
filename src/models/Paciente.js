@@ -6,10 +6,6 @@ const pacienteSchema = new Schema(
       type: String,
       required: true,
     },
-    edad: {
-      type: Number,
-      required: true,
-    },
     genero: {
       type: String,
       enum: ["Masculino", "Femenino", "Otro"],
@@ -27,7 +23,7 @@ const pacienteSchema = new Schema(
       type: String,
       required: true,
     },
-    email: {
+    correo: {
       type: String,
       required: true,
       unique: true,

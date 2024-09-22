@@ -11,7 +11,14 @@ const psicologoDomain = {
       console.error(error);
     }
   },
-
+  getPsicologos: () => {
+    try {
+      const psicologos = Psicologo.find();
+      return psicologos;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   // Función para obtener un psicologo por su ID
   getPsicologoById: (id) => {
     try {
@@ -26,11 +33,13 @@ const psicologoDomain = {
   updatePsicologo: (id, data) => {
     try {
       const psicologo = Psicologo.findById(id);
-      psicologo.nombre = data.nombre;
-      psicologo.especialidad = data.especialidad;
-      psicologo.edad = data.edad;
-      psicologo.enfoque = data.enfoque;
-      psicologo.color = data.color;
+      psicologo.nombres = data.nombres;
+      psicologo.apellidos = data.apellidos;
+      psicologo.genero = data.genero;
+      psicologo.fechaNacimiento = data.fechaNacimiento;
+      psicologo.direccion = data.direccion;
+      psicologo.telefono = data.telefono;
+      psicologo.correo = data.email;
 
       psicologo.save();
       return psicologo;

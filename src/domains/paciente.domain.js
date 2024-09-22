@@ -1,12 +1,20 @@
 const Paciente = require("../models/Paciente");
 
-const paienteDomain = {
+const pacienteDomain = {
   // Función para crear un nuevo paciente
   createPaciente: (data) => {
     try {
       const nuevoPaciente = new Paciente(data);
       nuevoPaciente.save();
       return nuevoPaciente;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  getPacientes: () => {
+    try {
+      const pacientes = Paciente.find();
+      return pacientes;
     } catch (error) {
       console.error(error);
     }
@@ -26,13 +34,13 @@ const paienteDomain = {
   updatePaciente: (id, data) => {
     try {
       const paciente = Paciente.findById(id);
-      paciente.nombre = data.nombre;
-      paciente.edad = data.edad;
+      paciente.nombres = data.nombres;
+      paciente.apellidos = data.apellidos;
       paciente.genero = data.genero;
       paciente.fechaNacimiento = data.fechaNacimiento;
       paciente.direccion = data.direccion;
       paciente.telefono = data.telefono;
-      paciente.email = data.email;
+      paciente.correo = data.email;
       paciente.antecedentes = data.antecedentes;
 
       paciente.save();
