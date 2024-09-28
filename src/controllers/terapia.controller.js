@@ -1,28 +1,28 @@
-const psicologoDomain = require("../domains/psicologo.domain");
+const terapiaDomain = require("../domains/paciente.domain");
 
 module.exports = {
   create: async function (req, res) {
     try {
-      const psicologo = req.body;
-      const psicologosaved = await psicologoDomain.createPsicologo(psicologo);
+      const item = req.body;
+      const itemsaved = await terapiaDomain.createPaciente(item);
       res.status(200).json({
-        msg: "Psicologo agregado satisfactoriamente",
-        id: psicologosaved._id,
+        msg: "Agregado satisfactoriamente",
+        id: itemsaved._id,
       });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ msg: "Ocurrión un error al buscar psicologos" });
+      res.status(400).json({ msg: "Ocurrión un error al buscar" });
     }
   },
   updated: async function (req, res) {
     try {
-      const psicologo = req.body;
-      const psicologosaved = await psicologoDomain.createPsicologo(
+      const item = req.body;
+      const psicologosaved = await terapiaDomain.createPsicologo(
         req.params.id,
-        psicologo
+        item
       );
       res.status(200).json({
-        msg: "Psicologo actualizado satisfactoriamente",
+        msg: "Sesion actualizada satisfactoriamente",
       });
     } catch (error) {
       console.error(error);
@@ -33,11 +33,9 @@ module.exports = {
   },
   delete: async function (req, res) {
     try {
-      const psicologosaved = await psicologoDomain.deletePsicologo(
-        req.params.id
-      );
+      const psicologosaved = await terapiaDomain.deletePsicologo(req.params.id);
       res.status(200).json({
-        msg: "Psicologo eliminado satisfactoriamente",
+        msg: "Sesion eliminada satisfactoriamente",
       });
     } catch (error) {
       console.error(error);
@@ -48,20 +46,20 @@ module.exports = {
   },
   findall: async function (req, res) {
     try {
-      const lista = await psicologoDomain.getPsicologos();
+      const lista = await terapiaDomain.getPsicologos();
       res.status(200).json({ items: lista });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ msg: "Ocurrión un error al buscar psicologos" });
+      res.status(400).json({ msg: "Ocurrión un error al buscar" });
     }
   },
   findById: async function (req, res) {
     try {
-      const objeto = await psicologoDomain.getPsicologoById(req.params.id);
+      const objeto = await terapiaDomain.getPsicologoById(req.params.id);
       res.status(200).json({ item: objeto });
     } catch (error) {
       console.error(error);
-      res.status(400).json({ msg: "Ocurrión un error al buscar psicologos" });
+      res.status(400).json({ msg: "Ocurrión un error al buscar" });
     }
   },
 };
