@@ -1,10 +1,10 @@
-const sesionDomain = require("../domains/sesion.domain");
+const horarioDomain = require("../domains/horario.domain");
 
 module.exports = {
   create: async function (req, res) {
     try {
       const item = req.body;
-      const itemsaved = await sesionDomain.createsesion(item);
+      const itemsaved = await horarioDomain.createHorario(item);
       res.status(200).json({
         msg: "Agregado satisfactoriamente",
         id: itemsaved._id,
@@ -17,12 +17,12 @@ module.exports = {
   updated: async function (req, res) {
     try {
       const item = req.body;
-      const psicologosaved = await sesionDomain.updatesesion(
+      const psicologosaved = await horarioDomain.updateHorario(
         req.params.id,
         item
       );
       res.status(200).json({
-        msg: "Sesion actualizada satisfactoriamente",
+        msg: "Horario actualizado satisfactoriamente",
       });
     } catch (error) {
       console.error(error);
@@ -33,7 +33,7 @@ module.exports = {
   },
   delete: async function (req, res) {
     try {
-      const psicologosaved = await sesionDomain.deletesesion(req.params.id);
+      const psicologosaved = await horarioDomain.deleteHorario(req.params.id);
       res.status(200).json({
         msg: "Sesion eliminada satisfactoriamente",
       });
@@ -46,7 +46,7 @@ module.exports = {
   },
   findall: async function (req, res) {
     try {
-      const lista = await sesionDomain.getsesions();
+      const lista = await horarioDomain.getHorarios();
       res.status(200).json({ items: lista });
     } catch (error) {
       console.error(error);
@@ -55,7 +55,7 @@ module.exports = {
   },
   findById: async function (req, res) {
     try {
-      const objeto = await sesionDomain.getsesionById(req.params.id);
+      const objeto = await horarioDomain.getHorarioById(req.params.id);
       res.status(200).json({ item: objeto });
     } catch (error) {
       console.error(error);
