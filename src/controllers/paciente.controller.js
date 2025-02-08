@@ -14,6 +14,13 @@ module.exports = {
       res.status(400).json({ msg: "Ocurrión un error al buscar psicologos" });
     }
   },
+  ejemplo: async function (req, res) {
+    try {
+      res.status(200).json({ msg: "Funciona" });
+    } catch {
+      res.status(400).json({ msg: "Ocurrión un error al buscar psicologos" });
+    }
+  },
   updated: async function (req, res) {
     try {
       const psicologo = req.body;
