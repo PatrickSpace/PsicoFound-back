@@ -7,3 +7,5 @@ router.get("/:id", psicologoController.findById);
 router.post("/", psicologoController.create);
 router.put("/", psicologoController.updated);
 router.delete("/", psicologoController.delete);
+
+module.exports = router;

@@ -1,25 +1,38 @@
 require("dotenv").config();
 const express = require("express");
-const router = express.Router();
-//require("./db.js");
 const morgan = require("morgan");
 const cors = require("cors");
-const pacienteController = require("./controllers/paciente.controller");
+const connectDB = require("./config/db");
 
-//set app
+// Inicialización de la app
 const app = express();
+const PORT = process.env.PORT || 3000;
+const CORS_ORIGIN = (process.env.CORS_ORIGIN || "http://localhost:5173").split(
+  ","
+);
 
-app.set("port", process.env.PORT || 3000);
+// Conexión a MongoDB
+connectDB();
+
+// Middlewares
+app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
-
-//middlewares
-app.use(cors());
 app.use(morgan("dev"));
 
-//routes
-app.use("/", router.get("/", pacienteController.ejemplo));
+// Rutas de la API (src/routes/index.js debe exportar un Router)
+const apiRouter = require("./routes");
 
-//init
-app.listen(app.get("port"), () => {
-  console.log(`API running at http://localhost:${app.get("port")}`);
+// Rutas
+app.use("/api", apiRouter); // monta todas las rutas bajo /api
+app.get("/", (_req, res) =>
+  res.json({
+    // raíz informativa
+    ok: true,
+    service: "PsicoFound API",
+  })
+);
+
+// Inicio del servidor
+app.listen(PORT, () => {
+  console.log(`API running at http://localhost:${PORT}`);
 });
